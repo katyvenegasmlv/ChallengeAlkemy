@@ -1,22 +1,20 @@
-import {useAuth0} from  "@auth0/auth0-react";
+
 import LogComponent from "../components/LogComp";
 import NavComponent from "../components/NavComponent";
-import ProductsContainer from "./ProductsContainer";
+import SingInComponent from "../components/SingInComponent";
+
 
 const InfoLogin= () => {
- const {isAuthenticated} = useAuth0();
+
   
     
     return(
 <div>
 <NavComponent></NavComponent>
-{isAuthenticated?(
-    <>
-    <ProductsContainer/>
-    </>
-) : (
+
 <LogComponent/>
-)}
+<SingInComponent/>
+
 
 
         </div>

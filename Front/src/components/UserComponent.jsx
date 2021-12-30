@@ -17,7 +17,6 @@ class UserComponent extends Component {
       user_name: '',
       password: '',
       email: '',
-      name: '',
       last_name: '',
       role: ''
     }
@@ -67,9 +66,8 @@ class UserComponent extends Component {
       form: {
         id_users: users.id_users,
         user_name: users.user_name,
-        password: users.password,
+        password: '',
         email: users.email,
-        name: users.name,
         last_name: users.last_name,
         role: users.role
       }
@@ -105,7 +103,6 @@ class UserComponent extends Component {
               <th>ID</th>
               <th>User</th>
               <th>Email</th>
-              <th>Name</th>
               <th>Last Name</th>
               <th>Role</th>
               <th>Actions</th>
@@ -118,7 +115,6 @@ class UserComponent extends Component {
                   <td>{users.id_users}</td>
                   <td>{users.user_name}</td>
                   <td>{users.email}</td>
-                  <td>{users.name}</td>
                   <td>{users.last_name}</td>
                   <td>{users.role}</td>
                   <td>
@@ -147,17 +143,17 @@ class UserComponent extends Component {
               <label htmlFor="description">Email</label>
               <input className="form-control" type="email" name="email" id="email" onChange={this.handleChange} value={form ? form.email : ''} />
               <br />
-              <label htmlFor="description">Name</label>
-              <input className="form-control" type="text" name="name" id="name" onChange={this.handleChange} value={form ? form.name : ''} />
-              <br />
               <label htmlFor="description">Last Name</label>
               <input className="form-control" type="text" name="last_name" id="last_name" onChange={this.handleChange} value={form ? form.last_name : ''} />
+              <br />
+              <label htmlFor="description">Password</label>
+              <input className="form-control" type="password" name="password" id="password" onChange={this.handleChange} value={form ? form.password : ''} />
               <br />
               <label htmlFor="description">Role</label>
               <select name="role" id="role" onChange={this.handleChange} value={form ? form.role : ''}>
                 <option>Seleccionar</option>
-                <option value="Admin">Admin</option>
-                <option value="User">User</option>
+                <option value="admin">admin</option>
+                <option value="view">view</option>
               </select>
 
 

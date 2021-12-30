@@ -13,7 +13,8 @@ class LogComponent extends Component {
     form: {
       id_users: '',
       email: '',
-      password: ''
+      password: '',
+      role: ''
     }
   }
 
@@ -37,10 +38,9 @@ class LogComponent extends Component {
         cookies.set("id" , response.data.id_users, {path: "/"});
         cookies.set("email" , response.data.email, {path: "/"});
         cookies.set("apellido" , response.data.last_name, {path: "/"});
-        cookies.set("nombre" , response.data.name, {path: "/"});
         cookies.set("rol" , response.data.role, {path: "/"});
         cookies.set("usuario" , response.data.user_name, {path: "/"});
-        alert( "Bienvenido " + response.data.last_name + " " + response.data.name);
+        alert( "Bienvenido " + response.data.last_name + " " + response.data.user_name);
         window.location.href = "http://localhost:3000/"
       }
       else{
@@ -48,6 +48,9 @@ class LogComponent extends Component {
       }
     })
   }
+
+  
+
 
   peticionPut = () => {
     axios.put("http://localhost:8080/user/UpdateUser/" + this.state.form.id_users, this.state.form).then(response => {
@@ -93,8 +96,9 @@ class LogComponent extends Component {
     return (
       <div className="App">
         <br /><br /><br />
-        <button className="btn btn-success" onClick={() => { this.setState({ form: null, tipoModal: 'insertar' }); this.modalInsertar() }}>Login</button>
- 
+        <button className="btn btn-success mb-4" onClick={() => { this.setState({ form: null, tipoModal: 'insertar' }); this.modalInsertar() }}>Login</button>
+        
+      
 
 
 
@@ -121,10 +125,13 @@ class LogComponent extends Component {
               </button> : <button className="btn btn-primary" onClick={() => this.peticionPut()}>
                Reset Password
               </button>
+              
             }
             <button className="btn btn-danger" onClick={() => this.modalInsertar()}>Cancelar</button>
+           
           </ModalFooter>
         </Modal>
+        
 
       </div>
 

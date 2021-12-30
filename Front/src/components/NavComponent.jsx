@@ -1,6 +1,5 @@
 import Cookies from 'universal-cookie';
 import favicon from '../images/favicon.png';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
 
@@ -20,7 +19,7 @@ const NavComponent= () => {
   
   
 
-    if(cookies.get("rol") == "Admin"){
+    if(cookies.get("rol") == "admin"){
     return(
         <div className="navColor">
 
@@ -42,8 +41,11 @@ const NavComponent= () => {
                     <a class="nav-link active" aria-current="page" href={'/user'}>User</a>
                   </li>
                     <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href={'/productos'}>Products</a>
+                      <a class="nav-link active" aria-current="page" href={'/personaje'}>Personajes</a>
                     </li>
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href={'/pelicula'}>Peliculas</a>
+                  </li>
                     </ul>
                   <form class="d-flex">
                       <label class="" aria-current="page"  >Bienvenido {cookies.get("usuario")}</label>
@@ -59,13 +61,13 @@ const NavComponent= () => {
     else{
 
     
-    if(cookies.get("rol") == "User"){
+    if(cookies.get("rol") == "view"){
       
     return(
       <div className="navColor">
 
           <h1>
-   <a href={'/'} className="aTitulo">Mundo Dinsey  </a><img scr={favicon} width="100px"/>
+   <a href={'/'} className="aTitulo">Mundo Disney  </a><img scr={favicon} width="100px"/>
    </h1>
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
@@ -80,7 +82,10 @@ const NavComponent= () => {
                   </li>
                  
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href={'/productos'}>Products</a>
+                    <a class="nav-link active" aria-current="page" href={'/personaje'}>Personajes</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href={'/pelicula'}>Peliculas</a>
                   </li>
                   </ul>
                 <form class="d-flex">

@@ -9,16 +9,34 @@ body {
 
 .aTitulo, ul{
   text-decoration: none;
-  color:  #C85C5C;
+  color:  white;
 }
 .aTitulo:hover, li:hover{
-  color: #F9975D;
+  color: #e7c1ab;
 
 }
 .navColor{
-  background-color: #FBD148;
+  background-color: #7e85e9;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+p> label{ color:grey;}
+p >input[type = "radio"]{ display:none;}
+
+.clasificacion {
+  direction: rtl;
+  display: initial;
+  unicode-bidi: bidi-override;
+}
+
+p>label:hover,
+p>label:hover ~ label {
+  color: orange;
+}
+
+p> input[type="radio"]:checked ~ label {
+  color: orange;
 }

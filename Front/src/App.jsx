@@ -2,7 +2,8 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import './App.css';
 import InfoLogin from './containers/Login';
 import HomeContainer from './containers/HomeContainer';
-import ProductsContainer from './containers/ProductsContainer';
+import PersonajeContainer from './containers/PersonajeContainer';
+import PeliculaContainer from './containers/PeliculaContainer';
 import UserCont from './containers/UserContainer';
 
 
@@ -16,11 +17,17 @@ const App= () => {
     <div className="App">
       <BrowserRouter>
       <Switch>
-        <Route exact path="/productos">
-          <ProductsContainer/>
+        <Route exact path="/personaje">
+          <PersonajeContainer/>
         </Route>
-        <Route path="/productos/:busqueda">
-          <ProductsContainer/>
+        <Route path="/personaje/:busqueda">
+          <PersonajeContainer/>
+        </Route>
+        <Route exact path="/pelicula">
+          <PeliculaContainer/>
+        </Route>
+        <Route path="/pelicula/:busqueda">
+          <PeliculaContainer/>
         </Route>
         <Route path="/login">
           <InfoLogin/>

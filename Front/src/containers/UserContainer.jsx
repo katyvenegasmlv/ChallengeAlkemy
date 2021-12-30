@@ -1,6 +1,5 @@
 import NavComponent from "../components/NavComponent";
 import UserComponent from "../components/UserComponent";
-import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import { EcommerceContext } from "../context/EcommerceContext";
 import  { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
@@ -24,6 +23,7 @@ const UserCont =  () => {
     }
     },[]);
     //http//localhost:8080/product/GetProducts
+    //'http://localhost:8080/user/GetUsers'
     //https://api.mercadolibre.com/sites/MLA/search?q=celulares
 
     const Agregar= (event, products)=>{
@@ -45,15 +45,7 @@ const UserCont =  () => {
     return(
         <div className="container">
           <NavComponent/>
-          <div className="btnexport">
-<ReactHTMLTableToExcel
-                    id="test-table-xls-button"
-                    className="btn btn-outline-success"
-                    table="table-user"
-                    filename="User-List"
-                    sheet="tableUsers"
-                    buttonText="Download List"/>
-          </div> 
+
          
             <div clasName="row">
                 
