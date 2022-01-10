@@ -26,15 +26,15 @@ class SingInComponent extends Component {
     })
   }
 
-  peticionPost = async () => {
+  peticionFind = async () => {
     delete this.state.form.id_users;
 
-    this.state.form.password = btoa(this.state.form.password) 
+ 
 
     await axios.post("http://localhost:8080/user/FindUserByEmailAndPass", this.state.form).then(response => {
       console.log(response.data)
-      if( response.data.id_users != 0){
-
+      if( response.data.email  ==this.state.form.email ){
+    
         cookies.set("id" , response.data.id_users, {path: "/"});
         cookies.set("email" , response.data.email, {path: "/"});
         cookies.set("apellido" , response.data.last_name, {path: "/"});
@@ -42,9 +42,12 @@ class SingInComponent extends Component {
         cookies.set("usuario" , response.data.user_name, {path: "/"});
         alert( "Bienvenido " + response.data.last_name + " " + response.data.user_name);
         window.location.href = "http://localhost:3000/"
+       
+        
       }
       else{
-        alert("El Usuario o la contraseña no son correctos")
+        alert("El email que intenta utilizar ya está registrado")
+        
       }
     })
   }
@@ -53,7 +56,9 @@ class SingInComponent extends Component {
   peticionPost = async () => {
     delete this.state.form.id_users;
     this.state.form.password = btoa(this.state.form.password)
+    this.peticionFind();
     await axios.post("http://localhost:8080/user/InsertUser", this.state.form).then(response => {
+      
       this.modalInsertar();
       this.peticionGet();
     }).catch(error => {
@@ -134,7 +139,7 @@ class SingInComponent extends Component {
           <ModalFooter>
             {this.state.tipoModal == 'insertar' ?
               <button className="btn btn-success" onClick={() => this.peticionPost()}>
-                Insertar
+                Crear cuenta
               </button> : <button className="btn btn-primary" onClick={() => this.peticionPut()}>
                 Actualizar
               </button>

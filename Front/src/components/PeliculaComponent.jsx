@@ -17,7 +17,7 @@ class PeliculaComponent extends Component {
       form:{
         id_pelicula: '',
         title: '',
-        category: '',
+        id_genero: [],
         personaje: '',
         fecha: '',
         calificacion: '',
@@ -26,6 +26,11 @@ class PeliculaComponent extends Component {
       }
     }
     
+    //let genero = {id_genero};
+    //for (let genero_id in genero)
+    //console.log(genero[genero_id]);
+
+
     peticionGet=()=>{
     axios.get("http://localhost:8080/movies/GetMovies").then(response=>{
       this.setState({data: response.data});
@@ -35,10 +40,13 @@ class PeliculaComponent extends Component {
     }
     
     peticionPost=async()=>{
-      delete this.state.form.id_personaje;
+      delete this.state.form.id_pelicula;
+      console.log(this.state.form);
+    
+  
      await axios.post("http://localhost:8080/movies/InsertMovies",this.state.form).then(response=>{
         this.modalInsertar();
-        this.peticionGet();
+        this.peticionGet(); 
       }).catch(error=>{
         console.log(error.message);
       })
@@ -68,7 +76,7 @@ class PeliculaComponent extends Component {
         form: {
           id_pelicula: Peliculas.id_pelicula,
           title: Peliculas.title,
-          category: Peliculas.category,
+          id_genero: Peliculas.id_genero,
           personaje: Peliculas.personaje,
           fecha: Peliculas.fecha,
           calificacion: Peliculas.calificacion,
@@ -117,7 +125,7 @@ class PeliculaComponent extends Component {
               return (
                 <tr>
               <td>{Peliculas.title}</td>
-              <td>{Peliculas.category}</td>
+              <td>{Peliculas.id_genero}</td>
               <td>{Peliculas.personaje}</td>
               <td>{Peliculas.fecha}</td>
               <td>{Peliculas.calificacion}</td>
@@ -147,8 +155,14 @@ class PeliculaComponent extends Component {
                         <input className="form-control" type="text" name="title" id="title" onChange={this.handleChange} value={form?form.title: ''}/>
                         <br />
                         <label htmlFor="category">Category</label>
-                        <input className="form-control" type="text" name="category" id="category" onChange={this.handleChange} value={form?form.category: ''}/>
-                        <br />
+                
+              <select name="id_genero" id="id_genero" onChange={this.handleChange} value={form ? form.id_genero : ''}>
+                <option>Seleccionar</option>
+                <option value="1">Accion</option>
+                <option value="2">Aventura</option>
+                <option value="3">Comedia</option>
+                <option value="4">Terror</option>
+              </select><br />
                         <label htmlFor="personaje">Personaje</label>
                         <input className="form-control" type="text" name="personaje" id="personaje" onChange={this.handleChange} value={form?form.personaje:''}/>
                         <br />
@@ -156,16 +170,16 @@ class PeliculaComponent extends Component {
                         <input className="form-control" type="date" name="fecha" id="fecha" onChange={this.handleChange} value={form?form.fecha:''}/>
                         <br />
                         <label htmlFor="calificacion">Calificacion</label>
-                        <p className="clasificacion" onChange={this.handleChange} value={form?form.fecha:''}>       
-    <input className="form-control" onChange={this.handleChange} value={form?form.fecha:''} id="radio1" type="radio" name="calificacion" value="5"/>
+                        <p className="clasificacion" onChange={this.handleChange} value={form?form.calificacion:''}>       
+    <input className="form-control" onChange={this.handleChange} value={form?form.calificacion:''} id="radio1" type="radio" name="calificacion" value="5"/>
     <label for="radio1">★</label>
-    <input className="form-control" onChange={this.handleChange} value={form?form.fecha:''} id="radio2" type="radio" name="calificacion" value="4"/>
+    <input className="form-control" onChange={this.handleChange} value={form?form.calificacion:''} id="radio2" type="radio" name="calificacion" value="4"/>
     <label for="radio2">★</label>
-    <input className="form-control" onChange={this.handleChange} value={form?form.fecha:''} id="radio3" type="radio" name="calificacion" value="3"/>
+    <input className="form-control" onChange={this.handleChange} value={form?form.calificacion:''} id="radio3" type="radio" name="calificacion" value="3"/>
     <label for="radio3">★</label>
-    <input className="form-control" onChange={this.handleChange} value={form?form.fecha:''} id="radio4" type="radio" name="calificacion" value="2"/>
+    <input className="form-control" onChange={this.handleChange} value={form?form.calificacion:''} id="radio4" type="radio" name="calificacion" value="2"/>
     <label for="radio4">★</label>
-    <input className="form-control" onChange={this.handleChange} value={form?form.fecha:''} id="radio5" type="radio" name="calificacion" value="1"/>
+    <input className="form-control" onChange={this.handleChange} value={form?form.calificacion:''} id="radio5" type="radio" name="calificacion" value="1"/>
     <label for="radio5">★</label>
     </p>
   <br />

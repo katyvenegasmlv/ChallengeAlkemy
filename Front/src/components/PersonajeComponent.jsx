@@ -102,9 +102,8 @@ console.log(this.state.form);
     <table class="table" id="table-Personaje">
       <thead class="thead-light" >
         <tr>
-          <th>ID</th>
           <th>Personaje</th>
-          <th>Category</th>
+          <th>Pelicula</th>
           <th>Description</th>
           <th>Peso</th>
           <th>Edad</th>
@@ -116,7 +115,6 @@ console.log(this.state.form);
         {this.state.data.map(Personajes=>{
           return (
             <tr>
-          <td>{Personajes.id_personaje}</td>
           <td>{Personajes.name}</td>
           <td>{Personajes.category}</td>
           <td>{Personajes.description}</td>
@@ -147,7 +145,7 @@ console.log(this.state.form);
                     <label htmlFor="Personaje">Personaje</label>
                     <input className="form-control" type="text" name="name" id="name" onChange={this.handleChange} value={form?form.name: ''}/>
                     <br />
-                    <label htmlFor="category">Category</label>
+                    <label htmlFor="category">Pelicula</label>
                     <input className="form-control" type="text" name="category" id="category" onChange={this.handleChange} value={form?form.category: ''}/>
                     <br />
                     <label htmlFor="description">Description</label>

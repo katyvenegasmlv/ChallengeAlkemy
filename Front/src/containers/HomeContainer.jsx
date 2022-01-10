@@ -7,7 +7,7 @@ const HomeContainer =  () => {
 
 
 <br />
-<a href="https://github.com/katyvenegasmlv/PineapleApp">GitHub Application</a>
+<a href="https://github.com/katyvenegasmlv/ChallengeAlkemy" target="_blank">GitHub Application</a>
 
 </div>)
 }

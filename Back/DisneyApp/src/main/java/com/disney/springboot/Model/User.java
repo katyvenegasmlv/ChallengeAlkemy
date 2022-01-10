@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 
 //etiqueta entidad
 @Entity
@@ -31,11 +30,11 @@ public class User implements Serializable {
 	   public String email;
 
 	   @Column(length = 50,nullable = false )
-	   public String last_name;
+	   private String last_name;
 
 	   @Column(length = 50 )
      	@Value("view")
-	   public String role = "view";
+	   private String role = "view";
 
 	   public long getId(){
 	      return id_users;

@@ -1,66 +1,39 @@
 package com.disney.springboot.Service;
 
-import java.io.IOException;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import com.sendgrid.Email;
-import com.sendgrid.Mail;
-import com.sendgrid.Method;
-import com.sendgrid.Personalization;
-import com.sendgrid.Request;
-import com.sendgrid.Response;
-import com.sendgrid.SendGrid;
+//import com.disney.springboot.Model.User;
+
+
 
 @Service
 public class emailService {
-
-	@Value("${app.sendgrid.templateId}")
-	private String templateId;
+	@Value("${spring.mail.username}")
+	private String from;	
+	
+	
 	@Autowired
-	SendGrid sendGrid;
-	public String sendEmail(String email) {
+	JavaMailSender javaMailSender;
+	
+	public String enviarMail(String toEmail, String body, String subject) {
+		SimpleMailMessage mailMessage = new SimpleMailMessage();
+		mailMessage.setFrom(from);
+		mailMessage.setTo(toEmail);
+		mailMessage.setSubject(subject);
+		mailMessage.setText(body);
 		
-		try {
-		Mail mail = prepareMail(email);
+	
 		
-		Request request = new Request();
+		javaMailSender.send(mailMessage);
 		
-		request.setMethod(Method.POST);
-		request.setEndpoint("mail/send");
-		request.setBody(mail.build());
-		
-		Response response = sendGrid.api(request);
-		
-		if(response!=null) {
-			System.out.println("response from"+ response);
-		}
+		return "correo enviado";
 	}
-		catch(IOException e) {
-			e.printStackTrace();
-			return "error in send";
-			}
-		return "mail has been send";
-		}
-	
-	
-	public Mail prepareMail(String email) {
-		Mail mail = new Mail();
-		Email fromEmail = new Email();
-		fromEmail.setEmail("katyvenegasmlv@gmail.com");
-		Email to = new Email();
-		to.setEmail(email);
-		
-		Personalization personalization = new Personalization();
-		personalization.addTo(to);
-		
-		mail.setTemplateId(templateId);
-		
-		return mail;
-		
-	}
-	
+
 	
 }

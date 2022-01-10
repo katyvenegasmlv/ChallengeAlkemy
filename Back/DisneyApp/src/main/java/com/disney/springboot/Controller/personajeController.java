@@ -49,13 +49,14 @@ public class personajeController {
     ///Recibe por parametro el personaje
     //Devuelve true en caso de exito
     @PostMapping("/InsertPersonaje")
-    public boolean InsertPersonaje(@RequestBody Personaje personaje, @RequestParam("picture") MultipartFile multipart){
+    public boolean InsertPersonaje(@RequestBody Personaje personaje){
 
   
     	
     	boolean result = true;
 
         personaje.id_personaje=0;
+        
 
         servicio.save(personaje);
         

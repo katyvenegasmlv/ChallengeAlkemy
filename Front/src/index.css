@@ -12,11 +12,11 @@ body {
   color:  white;
 }
 .aTitulo:hover, li:hover{
-  color: #e7c1ab;
+  color: #c4b4ac;
 
 }
 .navColor{
-  background-color: #7e85e9;
+  background-color: #353966;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

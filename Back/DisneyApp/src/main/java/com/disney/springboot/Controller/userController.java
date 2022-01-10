@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.disney.springboot.Model.User;
 import com.disney.springboot.Service.userService;
+import com.disney.springboot.Service.emailService;
 
 @RestController
 //Path despues inicio de la URL
@@ -27,6 +28,10 @@ public class userController {
 
 	@Autowired
     private userService servicio;
+	
+	@Autowired
+	emailService emailService;
+
     
     ///Metodo para buscar muchos usuarios
     //Devuelve un listado de usuarios
@@ -47,6 +52,14 @@ public class userController {
     	 boolean result = true;
     	users.id_users=0;
         servicio.save(users);
+        
+        
+        String toEmail = users.email;
+        String body = users.user_name +" te damos la bienvenida a Mundo Disney App" + "\n" + "Tu cuenta se generó correctamente";
+        String subject = "Bienvenida";
+ 
+        emailService.enviarMail(toEmail, body, subject);
+        
         return result;
 
     } 

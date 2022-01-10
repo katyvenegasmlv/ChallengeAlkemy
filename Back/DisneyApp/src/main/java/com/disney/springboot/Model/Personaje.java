@@ -1,11 +1,10 @@
 package com.disney.springboot.Model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.*;
 
 //etiqueta entidad
 @Entity
@@ -15,26 +14,49 @@ public class Personaje {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id_personaje;
+	
+    @ManyToMany
+    @JoinTable(
+            name = "pelicula_personaje",
+            joinColumns = @JoinColumn(name = "id_personaje", nullable = false),
+            inverseJoinColumns = @JoinColumn(name="id_pelicula", nullable = false)
+        )
+    Set<Pelicula> likedPeliculas;
 
     @Column(length = 50,nullable = false )
-    public String name;
+    private String name;
 
     @Column(length = 50,nullable = false )
-    public String category;
+    private String category;
 
     @Column(length = 50)
-    public String description;
+    private String description;
 
     @Column(nullable = false )
-    public double peso;
+    private double peso;
 
     @Column(nullable = false )
-    public double edad;
+    private double edad;
 
     @Column(nullable = true )
-    public String picture;
+    private String picture;
+    
+  
+     //   @ManyToMany(cascade = CascadeType.ALL)
+    //    private List<Pelicula> peliculas;
+       
+   //     public void addPelicula(Pelicula pelicula){
+    //        if(this.peliculas == null){
+     //           this.peliculas = new ArrayList<>();
+     //       }
+            
+      //      this.peliculas.add(pelicula);
+     //   }
 
-    public long getId_personaje(){
+
+   
+
+	public long getId_personaje(){
         return id_personaje;
     }
     public void setId_personaje(long id_personaje){

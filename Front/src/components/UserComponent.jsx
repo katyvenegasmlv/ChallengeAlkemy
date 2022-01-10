@@ -163,7 +163,7 @@ class UserComponent extends Component {
           <ModalFooter>
             {this.state.tipoModal == 'insertar' ?
               <button className="btn btn-success" onClick={() => this.peticionPost()}>
-                Insertar
+                Crear nuevo usuario
               </button> : <button className="btn btn-primary" onClick={() => this.peticionPut()}>
                 Actualizar
               </button>
