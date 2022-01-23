@@ -2,6 +2,10 @@ package com.disney.springboot.Controller;
 
 
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,8 +54,8 @@ public class personajeController {
     //Devuelve true en caso de exito
     @PostMapping("/InsertPersonaje")
     public boolean InsertPersonaje(@RequestBody Personaje personaje){
+    	
 
-  
     	
     	boolean result = true;
 

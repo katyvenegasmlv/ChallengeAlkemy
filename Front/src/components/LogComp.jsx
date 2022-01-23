@@ -18,13 +18,6 @@ class LogComponent extends Component {
     }
   }
 
-  peticionGet = () => {
-    axios.get("http://localhost:8080/user/GetUsers").then(response => {
-      this.setState({ data: response.data });
-    }).catch(error => {
-      console.log(error.message);
-    })
-  }
 
   peticionPost = async () => {
     delete this.state.form.id_users;
@@ -55,7 +48,7 @@ class LogComponent extends Component {
   peticionPut = () => {
     axios.put("http://localhost:8080/user/UpdateUser/" + this.state.form.id_users, this.state.form).then(response => {
       this.modalInsertar();
-      this.peticionGet();
+     
     })
   }
 
@@ -84,10 +77,6 @@ class LogComponent extends Component {
       }
     });
     console.log(this.state.form);
-  }
-
-  componentDidMount() {
-    this.peticionGet();
   }
 
 

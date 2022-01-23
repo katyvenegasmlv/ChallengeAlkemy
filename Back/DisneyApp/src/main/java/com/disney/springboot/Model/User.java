@@ -16,7 +16,12 @@ import org.springframework.beans.factory.annotation.Value;
 //etiqueta que identifica el nombre de la tabla users
 @Table(name="users")
 public class User implements Serializable {
-	 @Id
+	 /**
+	 * 
+	 */
+	//private static final long serialVersionUID = 1L;
+
+	@Id
 	   @GeneratedValue(strategy = GenerationType.IDENTITY)
 	   public long id_users;
 
@@ -35,6 +40,7 @@ public class User implements Serializable {
 	   @Column(length = 50 )
      	@Value("view")
 	   private String role = "view";
+	   
 
 	   public long getId(){
 	      return id_users;
@@ -79,6 +85,9 @@ public class User implements Serializable {
 	      
 	      
 	   }
+	   
+	   
+	  
 
 
 }

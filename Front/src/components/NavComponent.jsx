@@ -12,7 +12,10 @@ function cerrarSesion(){
         cookies.remove("nombre" , {path: "/"})
         cookies.remove("rol" , {path: "/"})
         cookies.remove("usuario" , {path: "/login"})
-
+        cookies.remove("peliculas" , {path: "/pelicula"})
+        window.opener.location= "http://localhost:3000/login";
+      window.close.href=  "http://localhost:3000/pelicula";
+        window.location.href = "http://localhost:3000/login"
 }
 
 const NavComponent= () => {
@@ -34,9 +37,7 @@ const NavComponent= () => {
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href={'/login'}>Login</a>
-                    </li>
+      
                     <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href={'/user'}>User</a>
                   </li>
@@ -48,7 +49,7 @@ const NavComponent= () => {
                   </li>
                     </ul>
                   <form class="d-flex">
-                      <label class="" aria-current="page"  >Bienvenido {cookies.get("usuario")}</label>
+                      <label class="" aria-current="page"  >Bienvenid@ {cookies.get("usuario")}</label>
                       <button class="btn pt-1" onClick={() => { cerrarSesion() }}><FontAwesomeIcon icon={faPowerOff} /></button>
                   </form>
                 </div>
@@ -77,9 +78,7 @@ const NavComponent= () => {
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href={'/login'}>Login</a>
-                  </li>
+              
                  
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href={'/personaje'}>Personajes</a>
@@ -90,7 +89,7 @@ const NavComponent= () => {
                   </ul>
                 <form class="d-flex">
                 
-                  <label class="pt-1" aria-current="page"  >Bienvenido {cookies.get("usuario")}</label>
+                  <label class="pt-1" aria-current="page"  >Bienvenid@ {cookies.get("usuario")}</label>
                   <button class="btn pt-1" onClick={() => { cerrarSesion() }}><FontAwesomeIcon icon={faPowerOff} /></button>
                 </form>
               </div>
@@ -103,6 +102,7 @@ const NavComponent= () => {
   }
   else{
     return(
+ 
       <div className="navColor">
 
           <h1>

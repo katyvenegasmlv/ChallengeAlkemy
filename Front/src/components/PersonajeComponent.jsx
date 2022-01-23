@@ -34,7 +34,9 @@ axios.get("http://localhost:8080/personaje/GetPersonajes").then(response=>{
 }
 
 peticionPost=async()=>{
-  delete this.state.form.id_personaje;
+  
+  this.state.form.picture = this.state.form.imagenB64
+
  await axios.post("http://localhost:8080/personaje/InsertPersonaje",this.state.form).then(response=>{
     this.modalInsertar();
     this.peticionGet();
@@ -44,6 +46,9 @@ peticionPost=async()=>{
 }
 
 peticionPut=()=>{
+
+  this.state.form.picture = this.state.form.imagenB64
+
   axios.put("http://localhost:8080/personaje/UpdatePersonaje/"+this.state.form.id_personaje, this.state.form).then(response=>{
     this.modalInsertar();
     this.peticionGet();
@@ -71,7 +76,8 @@ seleccionarPersonaje=(Personajes)=>{
       description: Personajes.description,
       peso: Personajes.peso,
       edad: Personajes.edad,
-      picture: Personajes.picture
+      picture: Personajes.picture,
+      imagenB64: ''
     }
   })
 }
@@ -86,6 +92,20 @@ await this.setState({
 });
 console.log(this.state.form);
 }
+
+handleChangeFile(e){
+
+  let files = e.target.files;
+
+  let reader = new FileReader();
+  reader.readAsDataURL(files[0]);
+
+  reader.onload=(e) =>{
+    this.state.form.imagenB64 = e.target.result
+  }
+
+}
+
 
   componentDidMount() {
     this.peticionGet();
@@ -120,7 +140,7 @@ console.log(this.state.form);
           <td>{Personajes.description}</td>
           <td>{Personajes.peso}</td>
           <td>{Personajes.edad}</td>
-          <td>{Personajes.picture}</td>
+          <td><img src={Personajes.picture} class="card-img-top" alt="..."/></td>
           <td>
                 <button className="btn btn-primary" onClick={()=>{this.seleccionarPersonaje(Personajes); this.modalInsertar()}}><FontAwesomeIcon icon={faEdit}/></button>
                 {"   "}
@@ -134,15 +154,17 @@ console.log(this.state.form);
     </table>
 
 
+    <Modal isOpen={this.state.modalInsertar}>
+ 
 
-    <Modal isOpen={this.state.modalInsertar} enctype="multipart/form-data">
                 <ModalHeader style={{display: 'block'}}>
                   <span style={{float: 'right'}} onClick={()=>this.modalInsertar()}>x</span>
                 </ModalHeader>
                 <ModalBody>
+               
                   <div className="form-group">
                  
-                    <label htmlFor="Personaje">Personaje</label>
+                    <label htmlFor="personaje">Personaje</label>
                     <input className="form-control" type="text" name="name" id="name" onChange={this.handleChange} value={form?form.name: ''}/>
                     <br />
                     <label htmlFor="category">Pelicula</label>
@@ -151,28 +173,34 @@ console.log(this.state.form);
                     <label htmlFor="description">Description</label>
                     <input className="form-control" type="text" name="description" id="description" onChange={this.handleChange} value={form?form.description:''}/>
                     <br />
-                    <label htmlFor="description">Peso</label>
+                    <label htmlFor="peso">Peso</label>
                     <input className="form-control" type="number" name="peso" id="peso" onChange={this.handleChange} value={form?form.peso:''}/>
                     <br />
-                    <label htmlFor="description">Edad</label>
+                    <label htmlFor="edad">Edad</label>
                     <input className="form-control" type="number" name="edad" id="edad" onChange={this.handleChange} value={form?form.edad:''}/>
                     <br />
-                   
+                    <label htmlFor="picture">Picture</label>
+                    <input className="form-control"  formEncType="multipart/form-data" type="file" name="picture" id="picture" onChange={(e)=>this.handleChangeFile(e)} value={undefined}/>
+                    <br />
                 
 
                   </div>
+                
                 </ModalBody>
 
-                <ModalFooter>
+                <ModalFooter> 
+               
                   {this.state.tipoModal=='insertar'?
                     <button className="btn btn-success" onClick={()=>this.peticionPost()}>
-                    Insertar
-                  </button>: <button className="btn btn-primary" onClick={()=>this.peticionPut()}>
+                    Crear Personaje
+                  </button>: <button  className="btn btn-primary" onClick={()=>this.peticionPut()}>
                     Actualizar
                   </button>
   }
                     <button className="btn btn-danger" onClick={()=>this.modalInsertar()}>Cancelar</button>
+                   
                 </ModalFooter>
+          
           </Modal>
 
 
@@ -184,7 +212,9 @@ console.log(this.state.form);
               <button className="btn btn-danger" onClick={()=>this.peticionDelete()}>Sí</button>
               <button className="btn btn-secundary" onClick={()=>this.setState({modalEliminar: false})}>No</button>
             </ModalFooter>
+            
           </Modal>
+         
   </div>
 
 

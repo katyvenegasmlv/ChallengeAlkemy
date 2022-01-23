@@ -14,7 +14,7 @@ const UserCont =  () => {
     const {busqueda} = useParams();
 
     useEffect(async() => {
-      let data = await fetch('http://localhost:8080/user/GetUsers');
+      let data = await fetch('https://api.mercadolibre.com/sites/MLA/search?q=celulares');
       let response = await data.json();
       setProducts(response);
       console.log(response);

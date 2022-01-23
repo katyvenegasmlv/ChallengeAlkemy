@@ -1,7 +1,6 @@
 package com.disney.springboot.Model;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -13,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.springframework.web.multipart.MultipartFile;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -44,7 +44,7 @@ public class Pelicula {
 	private Date fecha;
 
 	@Column(nullable = true)
-	private byte[] picture;
+	private String picture;
 
     @ManyToOne()
 	@JoinColumn(name="id_genero")
@@ -92,11 +92,11 @@ public class Pelicula {
 		this.fecha = fecha;
 	}
 
-	public byte[] getpicture() {
+	public String getpicture() {
 		return picture;
 	}
 
-	public void setpicture(byte[] picture) {
+	public void setpicture(String picture) {
 		this.picture = picture;
 	}
 

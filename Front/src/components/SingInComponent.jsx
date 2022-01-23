@@ -18,52 +18,60 @@ class SingInComponent extends Component {
     }
   }
 
-  peticionGet = () => {
-    axios.get("http://localhost:8080/user/GetUsers").then(response => {
-      this.setState({ data: response.data });
-    }).catch(error => {
-      console.log(error.message);
-    })
-  }
 
   peticionFind = async () => {
-    delete this.state.form.id_users;
 
- 
+    let respuesta 
+    await ("http://localhost:8080/user/FindUserByEmail", this.state.form).then(response => {
+      
+      respuesta = response
 
-    await axios.post("http://localhost:8080/user/FindUserByEmailAndPass", this.state.form).then(response => {
-      console.log(response.data)
-      if( response.data.email  ==this.state.form.email ){
-    
-        cookies.set("id" , response.data.id_users, {path: "/"});
-        cookies.set("email" , response.data.email, {path: "/"});
-        cookies.set("apellido" , response.data.last_name, {path: "/"});
-        cookies.set("rol" , response.data.role, {path: "/"});
-        cookies.set("usuario" , response.data.user_name, {path: "/"});
-        alert( "Bienvenido " + response.data.last_name + " " + response.data.user_name);
-        window.location.href = "http://localhost:3000/"
-       
-        
-      }
-      else{
-        alert("El email que intenta utilizar ya está registrado")
-        
-      }
     })
+
+    if( respuesta.data.email === null ){
+      return respuesta.data.id_users
+      
+    }
+    else{
+      return respuesta.data.id_users
+    }
+
+    
+  }
+
+  loginCookies = async (idUsuario) => {
+    
+    await axios.post("http://localhost:8080/user/GetUser/" + idUsuario).then(response => {
+      cookies.set("id" , response.data.id_users, {path: "/"});
+      cookies.set("email" , response.data.email, {path: "/"});
+      cookies.set("apellido" , response.data.last_name, {path: "/"});
+      cookies.set("rol" , response.data.role, {path: "/"});
+      cookies.set("usuario" , response.data.user_name, {path: "/"});
+      alert( "Bienvenid@ " + response.data.last_name + " " + response.data.user_name);
+      window.location.href = "http://localhost:3000/"
+    })
+    
   }
 
   
   peticionPost = async () => {
     delete this.state.form.id_users;
     this.state.form.password = btoa(this.state.form.password)
-    this.peticionFind();
-    await axios.post("http://localhost:8080/user/InsertUser", this.state.form).then(response => {
-      
-      this.modalInsertar();
-      this.peticionGet();
-    }).catch(error => {
-      console.log(error.message);
-    })
+    let validacionUsuario = await this.peticionFind()
+    console.log(validacionUsuario)
+    if(validacionUsuario == 0){
+      await axios.post("http://localhost:8080/user/InsertUser", this.state.form).then(response => { 
+        this.loginCookies(response.data);
+       
+        
+     
+      }).catch(error => {
+        console.log(error.message);
+      })
+    }
+    else{
+      alert("El email que intenta utilizar ya está registrado")
+    }
   }
 
   peticionPut = () => {
@@ -100,10 +108,6 @@ class SingInComponent extends Component {
     console.log(this.state.form);
   }
 
-  componentDidMount() {
-    this.peticionGet();
-  }
-
 
   render() {
     const { form } = this.state;
@@ -120,14 +124,14 @@ class SingInComponent extends Component {
           <ModalBody>
             <div className="form-group">
 
-              <label htmlFor="product">User</label>
+              <label htmlFor="product">Name</label>
               <input className="form-control" type="text" name="user_name" id="user_name" onChange={this.handleChange} value={form ? form.user_name : ''} />
-              <br />              
-              <label htmlFor="description">Email</label>
-              <input className="form-control" type="email" name="email" id="email" onChange={this.handleChange} value={form ? form.email : ''} />
-              <br />
+              <br /> 
               <label htmlFor="description">Last Name</label>
               <input className="form-control" type="text" name="last_name" id="last_name" onChange={this.handleChange} value={form ? form.last_name : ''} />
+              <br />             
+              <label htmlFor="description">Email</label>
+              <input className="form-control" type="email" name="email" id="email" onChange={this.handleChange} value={form ? form.email : ''} />
               <br />
               <label htmlFor="description">Password</label>
               <input className="form-control" type="password" name="password" id="password" onChange={this.handleChange} value={form ? form.password : ''} />
