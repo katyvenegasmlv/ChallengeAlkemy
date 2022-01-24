@@ -10,7 +10,7 @@ import com.disney.springboot.Model.Pelicula;
 import com.disney.springboot.Repository.IPeliculaRepository;
 
 @Service
-public class peliculaService implements IPeliculaService{
+public class PeliculaService implements IPeliculaService{
 
 	 @Autowired
 	    private IPeliculaRepository repositorio;

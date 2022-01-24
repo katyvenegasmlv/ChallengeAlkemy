@@ -11,7 +11,7 @@ import com.disney.springboot.Model.Personaje;
 import com.disney.springboot.Repository.IPersonajeRepository;
 
 @Service
-public class personajeService implements IPersonajeService{
+public class PersonajeService implements IPersonajeService{
 	 @Autowired
 	    private IPersonajeRepository repositorio;
 

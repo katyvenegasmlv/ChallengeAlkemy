@@ -12,35 +12,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.disney.springboot.Model.Genero;
-import com.disney.springboot.Service.generoService;
+import com.disney.springboot.Service.GeneroService;
 
-public class generoController {
+public class GeneroController {
 
 	@Autowired
-    private generoService servicio;
+    private GeneroService servicio;
 
 
     @Autowired(required = true)
-    ///Metodo para buscar muchas peliculas
-    //Devuelve un listado de peliculas
+    ///Metodo que retorna listado completo de genero
+    // return un listado de genero
     @GetMapping("/GetMovies")
-    public List<Genero> GetGenero(){
+    public List<Genero> getGenero(){
 
-        //Creo una lista de tipo peliculas que voy a llenar y devolver
+        //Creo una lista de tipo genero que voy a llenar y devolver
         List<Genero> genero = new ArrayList<Genero>();
 
-        //Lleno la lista de tipo peliculas
+        //Lleno la lista de tipo genero
         genero = servicio.findAll();
 
-        //Retorna la lista de tipo Pelicula con la informacion
+        //Retorna la lista de tipo genero con la informacion
         return genero;
     } 
 
-    ///Metodo para crear una pelicula
-    ///Recibe por parametro la pelicula
-    //Devuelve true en caso de exito
+    ///Metodo para crear un genero
+    ///@RequestBody recibe por parametro el genero
+    // return true en caso de exito
     @PostMapping("/InsertMovies")
-    public boolean InsertPelicula(@RequestBody Genero genero){
+    public boolean insertPelicula(@RequestBody Genero genero){
 
         boolean result = true;
 
@@ -51,11 +51,11 @@ public class generoController {
         return result;
     } 
 
-    ///Metodo para actualizar un personajeo
-    ///Recibe por parametro el personajeo
-    //Devuelve true en caso de exito
+    ///Metodo para actualizar un genero
+    ///@RequestBody recibe por parametro el genero
+    // return true en caso de exito
     @RequestMapping(value="/UpdateMovies/{id_genero}", method=RequestMethod.PUT)
-    public boolean UpdateGenero(@RequestBody Genero genero){
+    public boolean updateGenero(@RequestBody Genero genero){
 
         boolean result = true;
 
@@ -65,11 +65,11 @@ public class generoController {
         return result;
     } 
 
-    ///Metodo para buscar una pelicula
-    ///Recibe por parametro el name
-    //Devuelve la pelicula
+    ///Metodo para buscar un genero
+    ///Recibe por parametro el id
+    //return el genero
     @GetMapping("/GetMovies{id_genero}")
-    public Genero GetGenero(long id_genero){
+    public Genero getGenero(long id_genero){
         Genero genero = new Genero();
 
         genero=servicio.findById(id_genero);
@@ -77,11 +77,11 @@ public class generoController {
         return genero;
     } 
 
-    ///Metodo para eliminar una pelicula
-    ///Recibe por parametro el name
-    //Devuelve true en caso de exito
+    ///Metodo para eliminar un genero
+    ///@PathVariable recibe por parametro el id
+    //return true en caso de exito
     @RequestMapping(value="/DeleteMovies/{id_genero}", method=RequestMethod.DELETE)
-    public boolean DeleteGenero(@PathVariable long id_genero){
+    public boolean deleteGenero(@PathVariable long id_genero){
         boolean result = true;
 
         servicio.deleteById(id_genero);

@@ -1,14 +1,13 @@
 package com.disney.springboot.Model;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Set;
 
 import javax.persistence.*;
 
 //etiqueta entidad
 @Entity
-//etiqueta que identifica el nombre de la tabla productos
+//etiqueta que identifica el nombre de la tabla personaje
 @Table(name="personaje")
 public class Personaje {
 	@Id
@@ -63,46 +62,46 @@ public class Personaje {
         this.id_personaje = id_personaje;
     }
 
-    public String getname(){
+    public String getName(){
         return name;
     }
-    public void setname(String name){
+    public void setName(String name){
         this.name=name;
     }
 
-    public String getcategory(){
+    public String getCategory(){
         return category;
     }
-    public void setcategory(String category){
+    public void setCategory(String category){
         this.category=category;
     }
     
-    public String getdescription(){
+    public String getDescription(){
         return description;
     }
-    public void setdescription(String description){
+    public void setDescription(String description){
         this.description=description;
     }
 
-    public double getpeso(){
+    public double getPeso(){
          return peso;
     }
-    public void setpeso(double peso){
+    public void setPeso(double peso){
         this.peso=peso;
     }
     
 
-    public double getedad(){
+    public double getEdad(){
         return edad;
     }
-    public void setedad (double edad){
+    public void setEdad (double edad){
         this.edad=edad;
     }
     
-    public String getpicture(){
+    public String getPicture(){
         return picture;
     }
-    public void setpicture (String picture){
+    public void setPicture (String picture){
         this.picture=picture;
     }
 

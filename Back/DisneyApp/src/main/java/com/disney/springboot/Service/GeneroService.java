@@ -10,7 +10,7 @@ import com.disney.springboot.Model.Genero;
 import com.disney.springboot.Repository.IGeneroRepository;
 
 @Service
-public class generoService implements IGeneroService{
+public class GeneroService implements IGeneroService{
 	 @Autowired
 	    private IGeneroRepository repositorio;
 

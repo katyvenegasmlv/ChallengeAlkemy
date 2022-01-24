@@ -10,7 +10,7 @@ import com.disney.springboot.Model.User;
 import com.disney.springboot.Repository.IUserRepository;
 
 @Service
-public class userService implements IUserService{
+public class UserService implements IUserService{
 	
 	 @Autowired
 	

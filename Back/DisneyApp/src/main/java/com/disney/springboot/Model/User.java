@@ -19,7 +19,7 @@ public class User implements Serializable {
 	 /**
 	 * 
 	 */
-	//private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,38 +49,38 @@ public class User implements Serializable {
 	      this.id_users = id_users;
 	   }
 
-	   public String getuser_name(){
+	   public String getUser_name(){
 	      return user_name;
 	   }
-	   public void setuser_name(String user_name){
+	   public void setUser_name(String user_name){
 	      this.user_name=user_name;
 	   }
-	   public String getpassword(){
+	   public String getPassword(){
 	      return password;
 	   }
-	   public void setpassword(String password){
+	   public void setPassword(String password){
 	      this.password=password;
 	   }
 
-	   public String getemail(){
+	   public String getEmail(){
 	      return email;
 	   }
-	   public void setemail(String email){
+	   public void setEmail(String email){
 	      this.email=email;
 	   }
 
 
-	   public String getlast_name(){
+	   public String getLast_name(){
 	      return last_name;
 	   }
-	   public void setlast_name(String last_name){
+	   public void setLast_name(String last_name){
 	      this.last_name=last_name;
 	   }
-	   public String getrole(){
+	   public String getRole(){
 		    
 	      return role;
 	   }
-	   public void setrole(String role){
+	   public void setRole(String role){
 	      this.role=role;
 	      
 	      

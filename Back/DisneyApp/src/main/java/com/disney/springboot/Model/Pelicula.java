@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 //etiqueta entidad
 @Entity
-//etiqueta que identifica el nombre de la tabla productos
+//etiqueta que identifica el nombre de la tabla pelicula
 @Table(name = "pelicula")
 public class Pelicula {
 	@Id
@@ -59,44 +59,43 @@ public class Pelicula {
 		this.id_pelicula = id_pelicula;
 	}
 
-	public String gettitle() {
+	public String getTitle() {
 		return title;
 	}
 
-	public void settitle(String title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
 
-	public String getpersonaje() {
+	public String getPersonaje() {
 		return personaje;
 	}
 
-	public void setpersonaje(String personaje) {
+	public void setPersonaje(String personaje) {
 		this.personaje = personaje;
 	}
 
-	public double getcalificacion() {
+	public double getCalificacion() {
 		return calificacion;
 	}
 
-	public void setcalificacion(double calificacion) {
+	public void setCalificacion(double calificacion) {
 		this.calificacion = calificacion;
 	}
 
-	public Date getfecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 
-	public void setdate(Date fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 
-	public String getpicture() {
+	public String getPicture() {
 		return picture;
 	}
-
-	public void setpicture(String picture) {
+	public void setPicture(String picture) {
 		this.picture = picture;
 	}
 

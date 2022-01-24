@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.disney.springboot.Model.User;
-import com.disney.springboot.Service.userService;
-import com.disney.springboot.Service.emailService;
+import com.disney.springboot.Service.UserService;
+import com.disney.springboot.Service.EmailService;
 
 @RestController
 //Path despues inicio de la URL
@@ -24,18 +24,18 @@ import com.disney.springboot.Service.emailService;
 //inicio de la URL
 @CrossOrigin(origins = "http://localhost:3000")
 
-public class userController {
+public class UserController {
 
 	@Autowired
-	private userService servicio;
+	private UserService servicio;
 
 	@Autowired
-	emailService emailService;
+	EmailService emailService;
 
 	/// Metodo para buscar muchos usuarios
-	// Devuelve un listado de usuarios
+	// return un listado de usuarios
 	@GetMapping("/GetUsers")
-	public List<User> GetUsers() {
+	public List<User> getUsers() {
 
 		List<User> users = new ArrayList<User>();
 
@@ -44,12 +44,12 @@ public class userController {
 	}
 
 	/// Metodo para crear un usuario
-	/// Recibe por parametro el usuario
-	// Devuelve true en caso de exito
+	/// @RequestBody recibe por parametro el usuario
+	// return true en caso de exito
 	@PostMapping("/InsertUser")
-	public long InsertUser(@RequestBody User users) {
+	public long insertUser(@RequestBody User users) {
 		long result = 0;
-		users.id_users = 0;
+
 		servicio.save(users);
 
 		String toEmail = users.email;
@@ -76,18 +76,18 @@ public class userController {
 	}
 
 	/// Metodo para actualizar un usuario
-	/// Recibe por parametro el usuario
-	// Devuelve true en caso de exito
+	/// @RequestBody recibe por parametro el usuario
+	// return true en caso de exito
 	@RequestMapping(value = "/UpdateUser/{id_users}", method = RequestMethod.PUT)
-	public void UpdateUser(@RequestBody User users) {
+	public void updateUser(@RequestBody User users) {
 		servicio.save(users);
 	}
 
 	/// Metodo para buscar un usuario
 	/// Recibe por parametro el id
-	// Devuelve el usuario
+	// return el usuario
 	@RequestMapping(value = "/GetUser/{id_users}", method = RequestMethod.POST)
-	public User GetUser(@PathVariable long id_users) {
+	public User getUser(@PathVariable long id_users) {
 		User users = new User();
 		users = servicio.findById(id_users);
 		return users;
@@ -95,17 +95,17 @@ public class userController {
 
 	/// Metodo para eliminar un usuario
 	/// Recibe por parametro el usuario
-	// Devuelve true en caso de exito
+	// return true en caso de exito
 	@RequestMapping(value = "/DeleteUser/{id_users}", method = RequestMethod.DELETE)
-	public void DeleteUser(@PathVariable long id_users) {
+	public void deleteUser(@PathVariable long id_users) {
 		servicio.deleteById(id_users);
 	}
 
 	/// Metodo para buscar un usuario por login y pass
-	/// Recibe por parametro el usuario
-	// Devuelve el usuario
+	/// @RequestBody recibe por parametro el usuario
+	// return el usuario
 	@RequestMapping(value = "/FindUserByEmailAndPass", method = RequestMethod.POST)
-	public User FindUserByEmailAndPass(@RequestBody User userRequest) {
+	public User findUserByEmailAndPass(@RequestBody User userRequest) {
 
 		User usuario = new User();
 
@@ -137,7 +137,7 @@ public class userController {
 	}
 
 	@RequestMapping(value = "/FindUserByEmail", method = RequestMethod.POST)
-	public User FindUserByEmail(@RequestBody User userRequest) {
+	public User findUserByEmail(@RequestBody User userRequest) {
 
 		User usuario = new User();
 
