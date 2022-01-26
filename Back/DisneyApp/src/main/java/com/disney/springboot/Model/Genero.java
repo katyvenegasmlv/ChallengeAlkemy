@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class Genero {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long id_genero;
+	private long id_genero;
 
 	@Column(length = 50, nullable = false)
 	private String nombre;

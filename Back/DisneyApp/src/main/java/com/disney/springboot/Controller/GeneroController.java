@@ -44,7 +44,6 @@ public class GeneroController {
 
         boolean result = true;
 
-        genero.id_genero=0;
 
         servicio.save(genero);
         

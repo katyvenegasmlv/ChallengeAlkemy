@@ -51,9 +51,10 @@ public class UserController {
 		long result = 0;
 
 		servicio.save(users);
+		
 
-		String toEmail = users.email;
-		String body = users.user_name + " te damos la bienvenida a Mundo Disney App" + "\n"
+		String toEmail = users.getEmail();
+		String body = users.getUser_name() + " te damos la bienvenida a Mundo Disney App" + "\n"
 				+ "Tu cuenta se generó correctamente";
 		String subject = "Bienvenida";
 
@@ -65,8 +66,8 @@ public class UserController {
 
 		for (User user : usuarios) {
 
-			if (user.email.equals(users.email)) {
-				result = user.id_users;
+			if (user.getEmail().equals(users.getEmail())) {
+				result = user.getId_users();
 			}
 		}
 
@@ -113,7 +114,7 @@ public class UserController {
 
 		users = servicio.findAll();
 
-		String contraseña = userRequest.password;
+		String contraseña = userRequest.getPassword();
 	
 		byte[] bytesDecodificados = Base64.getDecoder().decode(contraseña);
 		String cadenaDecodificada = new String(bytesDecodificados);
@@ -121,12 +122,12 @@ public class UserController {
 	
 		for (User user : users) {
 
-			String passwordInterno = user.password;
+			String passwordInterno = user.getPassword();
 			
 			byte[] bytesDecodificadosInterno = Base64.getDecoder().decode(passwordInterno);
 			String password = new String(bytesDecodificadosInterno);
 		
-			if (user.email.equals(userRequest.email) && password.equals(cadenaDecodificada)) {
+			if (user.getEmail().equals(userRequest.getEmail()) && password.equals(cadenaDecodificada)) {
 				usuario = user;
 			}
 		}
@@ -147,7 +148,7 @@ public class UserController {
 
 		for (User user : users) {
 
-			if (user.email.equals(userRequest.email)) {
+			if (user.getEmail().equals(userRequest.getEmail())) {
 				usuario = user;
 			}
 		}

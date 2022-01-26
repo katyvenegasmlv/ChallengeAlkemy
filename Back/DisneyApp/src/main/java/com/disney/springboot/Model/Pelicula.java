@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Pelicula {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long id_pelicula;
+	private long id_pelicula;
 	@ManyToMany(mappedBy= "likedPeliculas")
     Set<Personaje> likes;
 

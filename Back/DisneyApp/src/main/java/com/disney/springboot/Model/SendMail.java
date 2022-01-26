@@ -2,10 +2,10 @@ package com.disney.springboot.Model;
 
 public class SendMail {
 	
-	public String subject;
-	public String to;
-	public String from;
-	public String text;
+	private String subject;
+	private String to;
+	private String from;
+	private String text;
 	
 	public String getSubject() {
 		return subject;

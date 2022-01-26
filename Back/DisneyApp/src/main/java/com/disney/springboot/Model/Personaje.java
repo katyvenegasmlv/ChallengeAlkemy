@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Personaje {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id_personaje;
+    private long id_personaje;
 	
     @ManyToMany
     @JoinTable(
