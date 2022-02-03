@@ -33,13 +33,14 @@ public class PersonajeController {
     //return un listado de personajes
     @GetMapping("/GetPersonajes")
     public List<Personaje> getPersonajes(){
-
+    	
         //Creo una lista de tipo personaje que voy a llenar y devolver
         List<Personaje> personajes = new ArrayList<Personaje>();
-
+ 
         //Lleno la lista de tipo personaje
         personajes = servicio.findAll();
-
+        
+        
         //Retorna la lista de tipo Personaje con la informacion
         return personajes;
     } 

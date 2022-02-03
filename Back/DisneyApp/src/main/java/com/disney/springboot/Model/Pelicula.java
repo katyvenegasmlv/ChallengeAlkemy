@@ -1,14 +1,17 @@
 package com.disney.springboot.Model;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -17,24 +20,27 @@ import javax.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 //etiqueta entidad
 @Entity
-//etiqueta que identifica el nombre de la tabla pelicula
 @Table(name = "pelicula")
 public class Pelicula {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id_pelicula;
-	@ManyToMany(mappedBy= "likedPeliculas")
-    Set<Personaje> likes;
 
 	@Column(length = 50, nullable = false)
 	private String title;
-
-
-	@Column(length = 50)
-	private String personaje;
+	
+	@ManyToMany (cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JoinTable(name = "pelicula_personaje", 
+	joinColumns = @JoinColumn(name = "id_pelicula", nullable = false), 
+	inverseJoinColumns = @JoinColumn(name = "id_personaje", nullable = false))
+	@JsonIgnoreProperties(value= {"pelicula"})
+	private List<Personaje> personaje;
+	
+	
 
 	@Column(nullable = false)
 	private double calificacion;
@@ -46,11 +52,13 @@ public class Pelicula {
 	@Column(nullable = true)
 	private String picture;
 
-    @ManyToOne()
-	@JoinColumn(name="id_genero")
+	@ManyToOne()
+	@JoinColumn(name = "id_genero")
 	private Genero id_genero;
 
- 
+
+	public Pelicula() {}
+	
 	public long getId_pelicula() {
 		return id_pelicula;
 	}
@@ -68,13 +76,7 @@ public class Pelicula {
 	}
 
 
-	public String getPersonaje() {
-		return personaje;
-	}
 
-	public void setPersonaje(String personaje) {
-		this.personaje = personaje;
-	}
 
 	public double getCalificacion() {
 		return calificacion;
@@ -95,6 +97,7 @@ public class Pelicula {
 	public String getPicture() {
 		return picture;
 	}
+
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
@@ -106,6 +109,14 @@ public class Pelicula {
 	public void setId_genero(Genero id_genero) {
 		this.id_genero = id_genero;
 	}
+	
+	public List<Personaje> getPersonajes() {
+        return personaje;
+    }
+
+    public void setPersonajes(List<Personaje> personaje) {
+        this.personaje = personaje;
+    }
 
 
 

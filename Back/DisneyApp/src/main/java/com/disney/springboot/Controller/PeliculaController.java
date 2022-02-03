@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import com.disney.springboot.Model.Pelicula;
 import com.disney.springboot.Service.PeliculaService;
@@ -55,11 +53,11 @@ public class PeliculaController {
 	// return true en caso de exito
     @RequestMapping(value="/InsertMovies", method = RequestMethod.POST)
 	public boolean insertPelicula(@RequestBody Pelicula pelicula) {
+    	
 
     	
 	 boolean result = true;
 
-		
 			servicio.save(pelicula);
 
 		return result;
