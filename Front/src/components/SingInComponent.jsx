@@ -22,7 +22,7 @@ class SingInComponent extends Component {
   peticionFind = async () => {
 
     let respuesta 
-    await ("http://localhost:8080/user/FindUserByEmail", this.state.form).then(response => {
+    await axios.post("http://localhost:8080/user/FindUserByEmail", this.state.form).then(response => {
       
       respuesta = response
 
@@ -55,7 +55,7 @@ class SingInComponent extends Component {
 
   
   peticionPost = async () => {
-    delete this.state.form.id_users;
+
     this.state.form.password = btoa(this.state.form.password)
     let validacionUsuario = await this.peticionFind()
     console.log(validacionUsuario)
@@ -125,17 +125,17 @@ class SingInComponent extends Component {
             <div className="form-group">
 
               <label htmlFor="product">Name</label>
-              <input className="form-control" type="text" name="user_name" id="user_name" onChange={this.handleChange} value={form ? form.user_name : ''} />
-              <br /> 
+              <input className="form-control mb-3" type="text" name="user_name" id="user_name" onChange={this.handleChange} value={form ? form.user_name : ''} />
+             
               <label htmlFor="description">Last Name</label>
-              <input className="form-control" type="text" name="last_name" id="last_name" onChange={this.handleChange} value={form ? form.last_name : ''} />
-              <br />             
+              <input className="form-control mb-3" type="text" name="last_name" id="last_name" onChange={this.handleChange} value={form ? form.last_name : ''} />
+                         
               <label htmlFor="description">Email</label>
-              <input className="form-control" type="email" name="email" id="email" onChange={this.handleChange} value={form ? form.email : ''} />
-              <br />
+              <input className="form-control mb-3" type="email" name="email" id="email" onChange={this.handleChange} value={form ? form.email : ''} />
+              
               <label htmlFor="description">Password</label>
-              <input className="form-control" type="password" name="password" id="password" onChange={this.handleChange} value={form ? form.password : ''} />
-              <br />
+              <input className="form-control mb-3" type="password" name="password" id="password" onChange={this.handleChange} value={form ? form.password : ''} />
+      
          
               </div>
           </ModalBody>

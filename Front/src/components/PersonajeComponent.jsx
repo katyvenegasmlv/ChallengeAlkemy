@@ -165,23 +165,23 @@ handleChangeFile(e){
                   <div className="form-group">
                  
                     <label htmlFor="personaje">Personaje</label>
-                    <input className="form-control" type="text" name="name" id="name" onChange={this.handleChange} value={form?form.name: ''}/>
-                    <br />
+                    <input className="form-control mb-3" type="text" name="name" id="name" onChange={this.handleChange} value={form?form.name: ''}/>
+                    
                     <label htmlFor="category">Pelicula</label>
-                    <input className="form-control" type="text" name="category" id="category" onChange={this.handleChange} value={form?form.category: ''}/>
-                    <br />
+                    <input className="form-control mb-3" type="text" name="category" id="category" onChange={this.handleChange} value={form?form.category: ''}/>
+                   
                     <label htmlFor="description">Description</label>
-                    <input className="form-control" type="text" name="description" id="description" onChange={this.handleChange} value={form?form.description:''}/>
-                    <br />
+                    <input className="form-control mb-3" type="text" name="description" id="description" onChange={this.handleChange} value={form?form.description:''}/>
+              
                     <label htmlFor="peso">Peso</label>
-                    <input className="form-control" type="number" name="peso" id="peso" onChange={this.handleChange} value={form?form.peso:''}/>
-                    <br />
+                    <input className="form-control mb-3" type="number" name="peso" id="peso" onChange={this.handleChange} value={form?form.peso:''}/>
+                   
                     <label htmlFor="edad">Edad</label>
-                    <input className="form-control" type="number" name="edad" id="edad" onChange={this.handleChange} value={form?form.edad:''}/>
-                    <br />
+                    <input className="form-control mb-3" type="number" name="edad" id="edad" onChange={this.handleChange} value={form?form.edad:''}/>
+                   
                     <label htmlFor="picture">Picture</label>
                     <input className="form-control"  formEncType="multipart/form-data" type="file" name="picture" id="picture" onChange={(e)=>this.handleChangeFile(e)} value={undefined}/>
-                    <br />
+                
                 
 
                   </div>

@@ -18,7 +18,7 @@ class PeliculaComponent extends Component {
       id_pelicula: '',
       title: '',
       id_genero: '',
-      personaje: '',
+      personajes: '',
       fecha: '',
       calificacion: '',
       picture: '',
@@ -29,13 +29,27 @@ class PeliculaComponent extends Component {
 
 
 
+
+
+
   peticionGet = () => {
     axios.get("http://localhost:8080/movies/GetMovies").then(response => {
+      console.log(response.data);
       this.setState({ data: response.data });
     }).catch(error => {
       console.log(error.message);
     })
   }
+
+  peticionGetPersonaje=()=>{
+    axios.get("http://localhost:8080/personaje/GetPersonajes").then(response=>{
+      
+      this.setState({personajes: response.data});
+    }).catch(error=>{
+      console.log(error.message);
+    })
+    }
+    
 
   peticionPost = async () => {
 
@@ -80,7 +94,7 @@ class PeliculaComponent extends Component {
         id_pelicula: Peliculas.id_pelicula,
         title: Peliculas.title,
         id_genero: Peliculas.id_genero.nombre,
-        personaje: Peliculas.personaje,
+        personaje: Peliculas.personajes[0].name,
         fecha: Peliculas.fecha,
         calificacion: Peliculas.calificacion,
         picture: Peliculas.picture,
@@ -121,11 +135,15 @@ class PeliculaComponent extends Component {
 
   componentDidMount() {
     this.peticionGet();
+    this.peticionGetPersonaje();
   }
 
 
-  render() {
-    const { form } = this.state;
+
+
+  render(){
+    const {form}=this.state;
+  
     return (
       <div className="App">
         <br /><br /><br />
@@ -150,7 +168,7 @@ class PeliculaComponent extends Component {
                 <tr>
                   <td>{Peliculas.title}</td>
                   <td>{Peliculas.id_genero.nombre}</td>
-                  <td>{Peliculas.personaje}</td>
+                  <td>{Peliculas.personajes[0].name}</td>
                   <td>{Peliculas.fecha}</td>
                   <td>{Peliculas.calificacion}</td>
                   <td><img src={Peliculas.picture}></img> </td>
@@ -177,33 +195,35 @@ class PeliculaComponent extends Component {
             <span style={{ float: 'right' }} onClick={() => this.modalInsertar()}>x</span>
           </ModalHeader>
           <ModalBody>
-            <div className="form-group">
+            <div className="form-group mb-3">
 
               <label htmlFor="Pelicula">Pelicula</label>
-              <input className="form-control" type="text" name="title" id="title" onChange={this.handleChange} />
-             < br />
+              <input className="form-control mb-3" type="text" name="title" id="title" onChange={this.handleChange} />
+             
              <label htmlFor="personaje">Picture </label>
-             <input className="form-control" type="file" name="picture" id="picture" onChange={(e)=>this.handleChangeFile(e)} value={undefined} />
-             < br />
+             <input className="form-control mb-3" type="file" name="picture" id="picture" onChange={(e)=>this.handleChangeFile(e)} value={undefined} />
+        
            
-              <label htmlFor="category">Category</label>
+              <label htmlFor="category" >Category</label>
 
-              <select name="id_genero" id="id_genero" onChange={this.handleChange} value={form ? form.id_genero : ''}>
+              <select  className="form-control ml-4 mb-3" name="id_genero" id="id_genero" onChange={this.handleChange} value={form ? form.id_genero : ''}>
                 <option>Seleccionar</option>
                 <option value="1">Accion</option>
                 <option value="2">Aventura</option>
                 <option value="3">Comedia</option>
                 <option value="4">Terror</option>
               </select>
-              <br />
-              <br />
+            
               <label htmlFor="personaje">Personaje</label>
-              <input className="form-control" type="text" name="personaje" id="personaje" onChange={this.handleChange} value={form ? form.personaje : ''} />
-              <br />
+              <select  className="form-control ml-4 mb-3" name="id_personake" id="id_personje" onChange={this.handleChange} value={form ? form.personajes : ''}>
+                <option>Seleccionar</option>
+            
+              </select>
+             
 
               <label htmlFor="fecha">Fecha</label>
-              <input className="form-control" type="date" name="fecha" id="fecha" onChange={this.handleChange} value={form ? form.fecha : ''} />
-              <br />
+              <input className="form-control mb-3" type="date" name="fecha" id="fecha" onChange={this.handleChange} value={form ? form.fecha : ''} />
+            
               <label htmlFor="calificacion">Calificacion</label>
               <p className="clasificacion" onChange={this.handleChange} value={form ? form.calificacion : ''}>
                 <input className="form-control" onChange={this.handleChange} value={form ? form.calificacion : ''} id="radio1" type="radio" name="calificacion" value="5" />
@@ -217,7 +237,7 @@ class PeliculaComponent extends Component {
                 <input className="form-control" onChange={this.handleChange} value={form ? form.calificacion : ''} id="radio5" type="radio" name="calificacion" value="1" />
                 <label for="radio5">★</label>
               </p>
-              <br />
+           
 
 
 

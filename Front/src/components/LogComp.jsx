@@ -84,8 +84,8 @@ class LogComponent extends Component {
     const { form } = this.state;
     return (
       <div className="App">
-        <br /><br /><br />
-        <button className="btn btn-success mb-4" onClick={() => { this.setState({ form: null, tipoModal: 'insertar' }); this.modalInsertar() }}>Login</button>
+       
+        <button className="btn btn-success mt-4 mb-4" onClick={() => { this.setState({ form: null, tipoModal: 'insertar' }); this.modalInsertar() }}>Login</button>
         
       
 
@@ -99,8 +99,8 @@ class LogComponent extends Component {
             <div className="form-group">
 
             <label htmlFor="description">Email</label>
-              <input className="form-control" type="email" name="email" id="email" onChange={this.handleChange} value={form ? form.email : ''} />
-              <br />
+              <input className="form-control mb-3" type="email" name="email" id="email" onChange={this.handleChange} value={form ? form.email : ''} />
+              
               <label htmlFor="category">Password</label>
               <input className="form-control" type="password" name="password" id="password" onChange={this.handleChange} value={form ? form.password : ''} />
               
